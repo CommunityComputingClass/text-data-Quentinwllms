@@ -1,7 +1,7 @@
 let bclr = 'white';
 let txtclr = 'red';
 let showText = false;
-let x = -700;
+let x = -500;
 let spaceText = true
 let confetiPieces = []
 let balls = []
@@ -34,7 +34,7 @@ background(bclr);
     textSize(40);
     textFont("Comic Sans MS");
     fill(0);
-    text("Hit Space for a Suprise Talon",110,400);
+    text("Hit Space for a Suprise",130,400);
   }
   
 if (showText) {
@@ -44,12 +44,13 @@ if (showText) {
 if (x > 170){
 
   x=170
-background ('white')
+background ('pink')
     textSize(40);
     textFont("Comic Sans MS");
-  fill(0)
+  fill(255)
  text ("Press x for some confeti",160,400)
-      text("(please don't spam)",200,500)
+ text("Happy valentines day!", 190, 300)
+      text("B = ball :)",290,500)
   
 }
   
@@ -67,7 +68,7 @@ background ('white')
 }
 
 function flash () {
-bclr=('red');
+bclr=('pink');
   setTimeout(flash2,100);
 }
 
@@ -81,7 +82,7 @@ function flash2 () {
     txtclr=('white');
   }
   else {
-    txtclr=('red');
+    txtclr=('pink');
   }
 
 }
@@ -92,7 +93,7 @@ function greet () {
     txtclrchanger();
   fill(txtclr);
   textSize(40);
-  text("Greetings and salutations", x, 300);
+  text("It's valentines day!", x, 300);
 
 }
 
@@ -112,12 +113,21 @@ function keyPressed () {
     if (keyCode == 66){
     for (let n = 0; n < 100; n++){
   let z = new Ball(
-    100, 100,random(0, 255),random(0, 255),random(0, 255),random(0, 10),random(0, 10),50,50);
+    400, 400,0,  randomExcluded(-10, 10, -2, 2),
+    randomExcluded(-10, 10, -2, 2),50,50);
 
   balls.push(z);
   print(balls);
 }
   }
+}
+
+function randomExcluded(min, max, excludeMin, excludeMax) {
+  let num;
+  do {
+    num = random(min, max);
+  } while (num > excludeMin && num < excludeMax);
+  return num;
 }
 
 class confeti {
@@ -168,12 +178,10 @@ this.rotation += this.rotationSpeed;
 }  
 
 class Ball {
-  constructor(x, y, r, g, b, speedY, speedX, diameter, diameter2) {
+  constructor(x, y, color2, speedY, speedX, diameter, diameter2) {
     this.x = x;
     this.y = y;
-    this.r = r;
-    this.g = g;
-    this.b = b;
+    this.color2 = floor(random(0,colors.length));
     this.speedY = speedY;
     this.speedX = speedX;
     this.diameter = diameter;
@@ -182,7 +190,7 @@ class Ball {
 
   drawBall() {
     stroke(0);
-    fill(this.r, this.g, this.b);
+    fill(colors[this.color2]);
     ellipse(this.x, this.y, this.diameter, this.diameter2);
   }
 
@@ -190,12 +198,12 @@ class Ball {
     this.x += this.speedX;
     this.y += this.speedY;
 
-    if (this.x > width || this.x < 0) {
-      this.speedX = -this.speedX;
-    }
+  //   if (this.x > width || this.x < 0) {
+  //     this.speedX = -this.speedX;
+  //   }
 
-    if (this.y > height - 25 || this.y < 0 + 25) {
-      this.speedY = -this.speedY;
-    }
-  }
+  //   if (this.y > height - 25 || this.y < 0 + 25) {
+  //     this.speedY = -this.speedY;
+  //   }
+   }
 }
